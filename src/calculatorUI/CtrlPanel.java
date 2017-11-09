@@ -1,6 +1,5 @@
 package calculatorUI;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -12,7 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableModel;
 
@@ -20,7 +18,7 @@ import main.CalculatorUI;
 
 public class CtrlPanel extends JPanel{
     JLabel yLabel, minLabel, maxLabel, stepLabel;
-    JButton Cbutton;
+    JButton Cbutton, Lbutton, Sbutton;
     TextFieldC yTF, minTF, maxTF, stepTF;
     JTable xyTable;
     JScrollPane tableSP;
@@ -50,7 +48,7 @@ public class CtrlPanel extends JPanel{
         yLabelC.anchor = GridBagConstraints.LINE_START;
         this.add(yLabel, yLabelC);
         
-        yTF = new TextFieldC("enter expression here");
+        yTF = new TextFieldC("x^2 + x + 1");
         yTF.setPreferredSize(new Dimension(300, 40));
         yTF.setFont(new Font("SANS_SERIF", Font.PLAIN, 24 ));
         GridBagConstraints yTFC = new GridBagConstraints();
@@ -77,7 +75,7 @@ public class CtrlPanel extends JPanel{
         minLabelC.insets = new Insets(10,0,10,0);
         this.add(minLabel, minLabelC);
         
-        minTF = new TextFieldC("min bound");
+        minTF = new TextFieldC("-10");
         minTF.setPreferredSize(new Dimension(100, 40));
         minTF.setFont(new Font("SANS_SERIF", Font.PLAIN, 24 ));
         GridBagConstraints minTFC = new GridBagConstraints();
@@ -94,7 +92,7 @@ public class CtrlPanel extends JPanel{
         maxLabelC.insets = new Insets(10,0,10,0);
         this.add(maxLabel, maxLabelC);
         
-        maxTF = new TextFieldC("max bound");
+        maxTF = new TextFieldC("10");
         maxTF.setPreferredSize(new Dimension(100, 40));
         maxTF.setFont(new Font("SANS_SERIF", Font.PLAIN, 24 ));
         GridBagConstraints maxTFC = new GridBagConstraints();
@@ -111,7 +109,7 @@ public class CtrlPanel extends JPanel{
         stepLabelC.insets = new Insets(10,0,10,0);
         this.add(stepLabel, stepLabelC);
         
-        stepTF = new TextFieldC("gaps between x");
+        stepTF = new TextFieldC("1");
         stepTF.setPreferredSize(new Dimension(100, 40));
         stepTF.setFont(new Font("SANS_SERIF", Font.PLAIN, 24 ));
         GridBagConstraints stepTFC = new GridBagConstraints();
@@ -137,8 +135,33 @@ public class CtrlPanel extends JPanel{
         tableSPC.insets = new Insets(0, 0, 0, 0);
         this.add(tableSP, tableSPC);
         
+        Lbutton = new JButton("zoom in");
+        GridBagConstraints LbuttonC = new GridBagConstraints();
+        LbuttonC.gridx = 1;
+        LbuttonC.gridy = 4;
+        LbuttonC.gridwidth = 1;
+        LbuttonC.gridheight = 1;
+        LbuttonC.insets = new Insets(0,0,0,0);
+        this.add(Lbutton, LbuttonC);
+        
+        Sbutton = new JButton("zoom out");
+        GridBagConstraints SbuttonC = new GridBagConstraints();
+        SbuttonC.gridx = 2;
+        SbuttonC.gridy = 4;
+        SbuttonC.gridwidth = 1;
+        SbuttonC.gridheight = 1;
+        SbuttonC.insets = new Insets(0,0,0,0);
+        this.add(Sbutton, SbuttonC);
+        
+        
+        Cbutton.setName("calculate");
         Cbutton.addActionListener(CUI.getCM());
         
+        Lbutton.setName("zoomin");
+        Lbutton.addActionListener(CUI.getCM());
+        
+        Sbutton.setName("zoomout");
+        Sbutton.addActionListener(CUI.getCM()); 
     }
     
     public String getYTF(){
@@ -155,6 +178,14 @@ public class CtrlPanel extends JPanel{
     
     public String getStepTF(){
         return stepTF.getText();
+    }
+    
+    public void setMinTF(String s){
+        minTF.setText(s);
+    }
+    
+    public void setMaxTF(String s){
+        maxTF.setText(s);
     }
     
     public void setStepTF(String t){

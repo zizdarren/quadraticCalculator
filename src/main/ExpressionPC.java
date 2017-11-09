@@ -45,16 +45,19 @@ public class ExpressionPC{
         
         for(int i=0; i<expression.length(); i++){
             if(expression.charAt(i)=='('){  
-                if(i==0){ tempIndex = i + 1; }  //skip first char if first char is "("
-                else{ parenthesesFlag++; }
+                //if(i==0){ tempIndex = i + 1; }  //skip first char if first char is "("
+                //else{ 
+                    parenthesesFlag++; 
+                //}
+                //the comment here and the comment below end of this block is related (1)
                 continue;
             }
-            if(expression.charAt(i)==')' && i<expression.length()-1){
+            if(expression.charAt(i)==')'){   //  "&& i<expression.length()-1" is inside check statement
                 parenthesesFlag--;
                 continue;
             }
             
-            //this block store the operator and the operand before the operator
+            //this block store the operator and the operand, which is in front the operator
             if(parenthesesFlag==0){
                 if(expression.charAt(i)=='+'||expression.charAt(i)=='-'||
                 expression.charAt(i)=='*'||expression.charAt(i)=='/'||
@@ -78,13 +81,17 @@ public class ExpressionPC{
         
         //push last operand of the expression
         int offset = 0;
+        
+        /*   //the comment here and the comment top of block is related (2)
         if(expression.charAt(expression.length()-1)==')'){  //skip last char if last char is ')'
             offset = 1;
         }
+        */
+        
         if(expression.substring(tempIndex, expression.length()-offset).isEmpty()){
             throw new Exception("Error1 : missing an Operand!!!");
         }
-        if(expression.substring(tempIndex, expression.length()-offset).equalsIgnoreCase("x")){
+        if(expression.substring(tempIndex, expression.length()-offset).equalsIgnoreCase("x")){ //check if last operand is X
             operandStack.push(new Operand(x));
         }else{
             operandStack.push(new Operand(expression.substring(tempIndex, expression.length()-offset)));

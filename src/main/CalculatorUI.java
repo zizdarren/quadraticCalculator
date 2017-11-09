@@ -33,7 +33,7 @@ public class CalculatorUI {
         
         frame.setLayout(new GridLayout(2, 1));
         
-        drawPanel = new DrawPanel();
+        drawPanel = new DrawPanel(this);
         drawPanel.setPreferredSize(new Dimension(800, 400));
         drawPanel.setBackground(Color.WHITE);
         

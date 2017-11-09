@@ -6,6 +6,9 @@ public class Operand {
     String term;
     
     public Operand(String s){
+        if(s.charAt(0)=='(' && s.charAt(s.length()-1)==')'){
+            s = s.substring(1, s.length()-1);
+        }
         try{
             this.number = Double.parseDouble(s);
         }catch(NumberFormatException e){
